@@ -1,0 +1,15 @@
+# Bun & node artefacts
+node_modules
+bun.lockb
+
+# Build output
+dist
+
+# Editor metadata
+.DS_Store
+.idea
+*.log
+*.tmp
+
+# Coverage
+coverage
