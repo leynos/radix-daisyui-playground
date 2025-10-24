@@ -82,4 +82,23 @@ describe("Radix × DaisyUI Playground", () => {
     expect(THEMES).toContain("business");
     expect(THEMES).toContain("dark");
   });
+
+  it("restores the cupcake theme from localStorage", async () => {
+    const mount = document.getElementById("mount");
+    expect(mount).toBeTruthy();
+    if (!mount) throw new Error("Missing mount element");
+
+    window.localStorage.setItem("rdp.theme", "cupcake");
+
+    root = createRoot(mount);
+    await act(async () => {
+      root?.render(<RadixDaisyUIPlayground />);
+    });
+
+    expect(document.documentElement.getAttribute("data-theme")).toBe("cupcake");
+    expect(window.localStorage.getItem("rdp.theme")).toBe("cupcake");
+
+    const themeStat = mount.querySelector<HTMLElement>(".stat .stat-value");
+    expect(themeStat?.textContent?.trim()).toBe("cupcake");
+  });
 });
