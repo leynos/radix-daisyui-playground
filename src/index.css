@@ -1,11 +1,9 @@
 @import "tailwindcss";
-@import "daisyui";
-
+@plugin "daisyui";
 
 @layer base {
   :root {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      sans-serif;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100%;
   }
 

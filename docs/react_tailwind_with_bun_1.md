@@ -1,5 +1,9 @@
 # React + Tailwind with Bun 1.3.0 — a short, no‑nonsense guide
 
+> **Note:** The playground now ships via a Vite build that targets GitHub
+> Pages, but this guide remains as a reference for Bun-centric experiments and
+> the optional `server.ts` preview helper.
+
 This is a pragmatic walkthrough for building and serving a tiny React + Tailwind app using **Bun 1.3.0**. It leans on Bun’s built‑in dev server (HMR, React Fast Refresh) and production bundler.
 
 ---

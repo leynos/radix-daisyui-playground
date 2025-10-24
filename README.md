@@ -1,14 +1,14 @@
 # Radix × DaisyUI Playground
 
-This project is a Bun-powered single-page application that showcases Radix UI
+This project is a Vite-powered single-page application that showcases Radix UI
 primitives styled with Tailwind CSS v4 and DaisyUI v5. It is intended as a
 playground for experimenting with cross-theme component styling, spacing, and
 interaction diagnostics.
 
 ## Features
 
-- **React 19 + Bun dev server** with hot reloading and a static build pipeline
-  via `bun build`.
+- **React 19 + Vite dev server** with hot module reload and a static build
+  pipeline tailored for GitHub Pages deployments.
 - **Tailwind CSS v4 + DaisyUI v5** applying theme tokens, utilities, and
   component classes across Radix primitives.
 - **Diagnostics panel** that runs runtime checks for DaisyUI tokens and theme
@@ -18,29 +18,46 @@ interaction diagnostics.
 
 ## Getting Started
 
-Install dependencies:
+Install dependencies with pnpm:
 
 ```bash
-bun install
+pnpm install
 ```
 
 Start the dev server with hot reload:
 
 ```bash
-bun run dev
+pnpm dev
 ```
 
-Create a production bundle:
+Create a production bundle tailored for GitHub Pages (sets the base path to
+`/radix-daisyui-playground/`):
 
 ```bash
-bun run build
+pnpm build
 ```
 
-Preview the built assets with Bun’s static server:
+Preview the built assets with Vite’s static server:
 
 ```bash
-bun run preview
+pnpm preview
 ```
+
+> Existing Bun helpers remain available if you prefer them. For example,
+> `bun run server.ts` still serves `dist/` with an SPA fallback.
+
+## GitHub Pages workflow
+
+- `.github/workflows/deploy.yml` builds the site with pnpm and publishes to
+  GitHub Pages on pushes to `main`.
+- `make test-action` executes the workflow’s `build` job locally with
+  [`act`](https://github.com/nektos/act) and runs a small smoke test over the
+  generated artefacts.
+- `make test-action-deploy` rehearses the `build` → `deploy` sequence using
+  stubbed replacements for the Pages-specific actions, so you can exercise the
+  entire job graph offline.
+- `make test-action-local` performs the fast path (`pnpm install`, `pnpm build`)
+  with the same smoke checks, which is handy for CI parity without Docker.
 
 ## Diagnostics
 

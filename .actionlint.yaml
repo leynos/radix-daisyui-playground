@@ -1,0 +1,11 @@
+rules:
+  required-permissions: error
+
+actions:
+  allowed:
+    - "actions/checkout@v4"
+    - "actions/setup-node@v4"
+    - "pnpm/action-setup@v4"
+    - "actions/upload-pages-artifact@v3"
+    - "actions/deploy-pages@v4"
+  disallowed: []

@@ -26,31 +26,31 @@
     @tailwind base; @tailwind components; @tailwind utilities;
 */
 
-import React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
-import * as Tabs from "@radix-ui/react-tabs";
+import * as AvatarPr from "@radix-ui/react-avatar";
+import * as CheckboxPr from "@radix-ui/react-checkbox";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import * as Popover from "@radix-ui/react-popover";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import * as SwitchPr from "@radix-ui/react-switch";
-import * as SliderPr from "@radix-ui/react-slider";
-import * as CheckboxPr from "@radix-ui/react-checkbox";
-import * as RadioGroupPr from "@radix-ui/react-radio-group";
-import * as ProgressPr from "@radix-ui/react-progress";
-import * as AvatarPr from "@radix-ui/react-avatar";
-import * as SelectPr from "@radix-ui/react-select";
-import * as ScrollAreaPr from "@radix-ui/react-scroll-area";
-import * as ToastPr from "@radix-ui/react-toast";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   Cross2Icon,
   InfoCircledIcon,
-  SunIcon,
   MoonIcon,
+  SunIcon,
 } from "@radix-ui/react-icons";
+import * as Popover from "@radix-ui/react-popover";
+import * as ProgressPr from "@radix-ui/react-progress";
+import * as RadioGroupPr from "@radix-ui/react-radio-group";
+import * as ScrollAreaPr from "@radix-ui/react-scroll-area";
+import * as SelectPr from "@radix-ui/react-select";
+import * as SliderPr from "@radix-ui/react-slider";
+import * as SwitchPr from "@radix-ui/react-switch";
+import * as Tabs from "@radix-ui/react-tabs";
+import * as ToastPr from "@radix-ui/react-toast";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import React from "react";
 
 // Themes list (typed)
 const THEMES = [
@@ -72,7 +72,7 @@ const THEMES = [
   "coffee",
 ] as const;
 
-type ThemeName = typeof THEMES[number];
+type ThemeName = (typeof THEMES)[number];
 
 // -------------------------------------------------------------------------
 // Utilities
@@ -106,9 +106,9 @@ const TOKEN_ALIAS_GROUPS: readonly (readonly string[])[] = [
 
 const TOKEN_FALLBACKS = TOKEN_ALIAS_GROUPS.reduce<Record<string, readonly string[]>>(
   (acc, group) => {
-    group.forEach((token) => {
+    for (const token of group) {
       acc[token] = group;
-    });
+    }
     return acc;
   },
   {},
@@ -212,7 +212,11 @@ function ThemePicker({
   return (
     <SelectPr.Root value={theme} onValueChange={(v) => setTheme(v as ThemeName)}>
       <SelectPr.Trigger asChild>
-        <button className="btn join-item min-w-44 justify-between" aria-label="Choose theme">
+        <button
+          type="button"
+          className="btn join-item min-w-44 justify-between"
+          aria-label="Choose theme"
+        >
           <span className="truncate capitalize">{theme}</span>
           <SelectPr.Icon>
             <ChevronDownIcon />
@@ -221,7 +225,11 @@ function ThemePicker({
       </SelectPr.Trigger>
       <SelectPr.Portal>
         {/* Surface background directly on Radix Content */}
-        <SelectPr.Content position="popper" sideOffset={8} className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl">
+        <SelectPr.Content
+          position="popper"
+          sideOffset={8}
+          className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl"
+        >
           <div className="menu menu-sm bg-base-100 rounded-box w-56 p-1">
             <SelectPr.ScrollUpButton className="flex items-center justify-center p-1">
               <ChevronUpIcon />
@@ -269,7 +277,8 @@ function TabsDemo() {
       <div className="p-4 rounded-box bg-base-100 border border-base-200 mt-3">
         <Tabs.Content value="t1">
           <p className="text-sm text-base-content/80">
-            This area reflects your tab content. Attach tokens and typographic rules here to evaluate reading comfort.
+            This area reflects your tab content. Attach tokens and typographic rules here to
+            evaluate reading comfort.
           </p>
         </Tabs.Content>
         <Tabs.Content value="t2">
@@ -291,7 +300,11 @@ function AccordionDemo() {
   return (
     <Accordion.Root type="single" collapsible className="w-full">
       {[1, 2, 3].map((n) => (
-        <Accordion.Item key={n} value={`item-${n}`} className="border border-base-200 rounded-box mb-2 bg-base-100">
+        <Accordion.Item
+          key={n}
+          value={`item-${n}`}
+          className="border border-base-200 rounded-box mb-2 bg-base-100"
+        >
           <Accordion.Header>
             <Accordion.Trigger className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-base-200 rounded-box transition">
               <span className="font-medium">Panel {n}</span>
@@ -311,7 +324,9 @@ function DialogDemo() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="btn btn-primary">Open dialog</button>
+        <button type="button" className="btn btn-primary">
+          Open dialog
+        </button>
       </Dialog.Trigger>
       <Dialog.Portal>
         {/* Explicit background color via DaisyUI token class */}
@@ -322,7 +337,7 @@ function DialogDemo() {
               <div className="flex items-start justify-between">
                 <Dialog.Title className="card-title">Dialog title</Dialog.Title>
                 <Dialog.Close asChild>
-                  <button className="btn btn-ghost btn-sm" aria-label="Close">
+                  <button type="button" className="btn btn-ghost btn-sm" aria-label="Close">
                     <Cross2Icon />
                   </button>
                 </Dialog.Close>
@@ -332,10 +347,14 @@ function DialogDemo() {
               </Dialog.Description>
               <div className="card-actions justify-end mt-4">
                 <Dialog.Close asChild>
-                  <button className="btn">Cancel</button>
+                  <button type="button" className="btn">
+                    Cancel
+                  </button>
                 </Dialog.Close>
                 <Dialog.Close asChild>
-                  <button className="btn btn-primary">Confirm</button>
+                  <button type="button" className="btn btn-primary">
+                    Confirm
+                  </button>
                 </Dialog.Close>
               </div>
             </div>
@@ -350,14 +369,25 @@ function DropdownMenuDemo() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="btn">Actions</button>
+        <button type="button" className="btn">
+          Actions
+        </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content sideOffset={8} className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl min-w-48 p-2">
-          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer">Edit</DropdownMenu.Item>
-          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer">Duplicate</DropdownMenu.Item>
+        <DropdownMenu.Content
+          sideOffset={8}
+          className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl min-w-48 p-2"
+        >
+          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer">
+            Edit
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer">
+            Duplicate
+          </DropdownMenu.Item>
           <DropdownMenu.Separator className="my-2 h-px bg-base-300" />
-          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer text-error">Delete</DropdownMenu.Item>
+          <DropdownMenu.Item className="menu-item px-3 py-2 rounded hover:bg-base-200 cursor-pointer text-error">
+            Delete
+          </DropdownMenu.Item>
           <DropdownMenu.Arrow className="fill-base-100" />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
@@ -369,20 +399,29 @@ function PopoverDemo() {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <button className="btn btn-outline">Details</button>
+        <button type="button" className="btn btn-outline">
+          Details
+        </button>
       </Popover.Trigger>
       <Popover.Portal>
         {/* Background on the Radix surface itself */}
-        <Popover.Content sideOffset={8} className="max-w-xs z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl p-0">
+        <Popover.Content
+          sideOffset={8}
+          className="max-w-xs z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl p-0"
+        >
           <div className="card bg-base-100 border-0 shadow-none">
             <div className="card-body p-4">
               <div className="flex items-center gap-2">
                 <InfoCircledIcon />
                 <h3 className="font-medium">Compact surface</h3>
               </div>
-              <p className="text-sm text-base-content/70">Great for inline explanations, microcopy, or helping text.</p>
+              <p className="text-sm text-base-content/70">
+                Great for inline explanations, microcopy, or helping text.
+              </p>
               <Popover.Close asChild>
-                <button className="btn btn-sm mt-2 self-end">Close</button>
+                <button type="button" className="btn btn-sm mt-2 self-end">
+                  Close
+                </button>
               </Popover.Close>
             </div>
           </div>
@@ -398,12 +437,15 @@ function TooltipDemo() {
     <Tooltip.Provider delayDuration={300}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <button className="btn btn-circle">
+          <button type="button" className="btn btn-circle">
             <InfoCircledIcon />
           </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
-          <Tooltip.Content sideOffset={8} className="px-3 py-1.5 rounded bg-base-200 text-sm text-base-content border border-base-300 shadow z-[9999]">
+          <Tooltip.Content
+            sideOffset={8}
+            className="px-3 py-1.5 rounded bg-base-200 text-sm text-base-content border border-base-300 shadow z-[9999]"
+          >
             Helpful tooltip
             <Tooltip.Arrow className="fill-base-200" />
           </Tooltip.Content>
@@ -496,7 +538,9 @@ function CheckboxRadioDemo() {
               <CheckIcon />
             </CheckboxPr.Indicator>
           </CheckboxPr.Root>
-          <label htmlFor="cb1" className="text-sm">Email notifications</label>
+          <label htmlFor="cb1" className="text-sm">
+            Email notifications
+          </label>
         </div>
         <div className="flex items-center gap-3">
           <CheckboxPr.Root
@@ -509,7 +553,9 @@ function CheckboxRadioDemo() {
               <CheckIcon />
             </CheckboxPr.Indicator>
           </CheckboxPr.Root>
-          <label htmlFor="cb2" className="text-sm">Product updates</label>
+          <label htmlFor="cb2" className="text-sm">
+            Product updates
+          </label>
         </div>
       </div>
       <RadioGroupPr.Root value={radio} onValueChange={setRadio} className="space-y-3">
@@ -522,7 +568,9 @@ function CheckboxRadioDemo() {
             >
               <div className="size-2 rounded-full bg-primary data-[state=unchecked]:hidden" />
             </RadioGroupPr.Item>
-            <label htmlFor={`r-${val}`} className="text-sm">Choice {val.toUpperCase()}</label>
+            <label htmlFor={`r-${val}`} className="text-sm">
+              Choice {val.toUpperCase()}
+            </label>
           </div>
         ))}
       </RadioGroupPr.Root>
@@ -539,14 +587,26 @@ function ProgressAvatarDemo() {
   return (
     <div className="flex items-center justify-between gap-6">
       <div className="w-full">
-        <ProgressPr.Root value={progress} className="relative h-4 w-full overflow-hidden rounded bg-base-300">
-          <ProgressPr.Indicator style={{ width: `${progress}%` }} className="h-full bg-primary transition-[width] duration-700" />
+        <ProgressPr.Root
+          value={progress}
+          className="relative h-4 w-full overflow-hidden rounded bg-base-300"
+        >
+          <ProgressPr.Indicator
+            style={{ width: `${progress}%` }}
+            className="h-full bg-primary transition-[width] duration-700"
+          />
         </ProgressPr.Root>
         <div className="mt-2 text-sm text-base-content/70">{progress}% complete</div>
       </div>
       <AvatarPr.Root className="inline-flex size-14 select-none items-center justify-center overflow-hidden rounded-full align-middle ring ring-primary ring-offset-2 ring-offset-base-100">
-        <AvatarPr.Image src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=200&auto=format&fit=crop" alt="Avatar" className="h-full w-full object-cover" />
-        <AvatarPr.Fallback className="text-sm bg-base-200 w-full h-full grid place-items-center">PX</AvatarPr.Fallback>
+        <AvatarPr.Image
+          src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=200&auto=format&fit=crop"
+          alt="Avatar"
+          className="h-full w-full object-cover"
+        />
+        <AvatarPr.Fallback className="text-sm bg-base-200 w-full h-full grid place-items-center">
+          PX
+        </AvatarPr.Fallback>
       </AvatarPr.Root>
     </div>
   );
@@ -557,7 +617,7 @@ function SelectDemo() {
   return (
     <SelectPr.Root value={value} onValueChange={setValue}>
       <SelectPr.Trigger asChild>
-        <button className="btn justify-between w-56">
+        <button type="button" className="btn justify-between w-56">
           <SelectPr.Value />
           <SelectPr.Icon>
             <ChevronDownIcon />
@@ -565,7 +625,11 @@ function SelectDemo() {
         </button>
       </SelectPr.Trigger>
       <SelectPr.Portal>
-        <SelectPr.Content position="popper" sideOffset={8} className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl">
+        <SelectPr.Content
+          position="popper"
+          sideOffset={8}
+          className="z-[9999] bg-base-100 border border-base-200 rounded-box shadow-xl"
+        >
           <div className="menu menu-sm bg-base-100 rounded-box w-56 p-1">
             <SelectPr.ScrollUpButton className="flex items-center justify-center p-1">
               <ChevronUpIcon />
@@ -577,7 +641,11 @@ function SelectDemo() {
                 { label: "Cherry", value: "cherry" },
                 { label: "Dragonfruit", value: "dragonfruit" },
               ].map((opt) => (
-                <SelectPr.Item key={opt.value} value={opt.value} className="px-3 py-2 rounded cursor-pointer data-[highlighted]:bg-base-200 outline-none flex items-center justify-between">
+                <SelectPr.Item
+                  key={opt.value}
+                  value={opt.value}
+                  className="px-3 py-2 rounded cursor-pointer data-[highlighted]:bg-base-200 outline-none flex items-center justify-between"
+                >
                   <SelectPr.ItemText>{opt.label}</SelectPr.ItemText>
                   <SelectPr.ItemIndicator>
                     <CheckIcon />
@@ -603,11 +671,16 @@ function ScrollAreaDemo() {
       <ScrollAreaPr.Viewport className="h-full w-full p-3">
         <ul className="space-y-2">
           {items.map((it) => (
-            <li key={it} className="px-3 py-2 rounded bg-base-200">{it}</li>
+            <li key={it} className="px-3 py-2 rounded bg-base-200">
+              {it}
+            </li>
           ))}
         </ul>
       </ScrollAreaPr.Viewport>
-      <ScrollAreaPr.Scrollbar orientation="vertical" className="flex select-none touch-none p-0.5 bg-base-200">
+      <ScrollAreaPr.Scrollbar
+        orientation="vertical"
+        className="flex select-none touch-none p-0.5 bg-base-200"
+      >
         <ScrollAreaPr.Thumb className="relative flex-1 rounded bg-base-300" />
       </ScrollAreaPr.Scrollbar>
     </ScrollAreaPr.Root>
@@ -618,10 +691,18 @@ function ToastDemo() {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
     <ToastPr.Provider swipeDirection="right" duration={2500}>
-      <button className="btn btn-secondary" onClick={() => setOpen(true)}>Show toast</button>
-      <ToastPr.Root open={open} onOpenChange={setOpen} className="rounded-box bg-base-100 border border-base-200 shadow-xl px-4 py-3 data-[swipe=move]:translate-x-0 data-[swipe=cancel]:translate-x-0 data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut">
+      <button type="button" className="btn btn-secondary" onClick={() => setOpen(true)}>
+        Show toast
+      </button>
+      <ToastPr.Root
+        open={open}
+        onOpenChange={setOpen}
+        className="rounded-box bg-base-100 border border-base-200 shadow-xl px-4 py-3 data-[swipe=move]:translate-x-0 data-[swipe=cancel]:translate-x-0 data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut"
+      >
         <ToastPr.Title className="font-medium">Saved</ToastPr.Title>
-        <ToastPr.Description className="text-sm text-base-content/70">Your changes have been stored safely.</ToastPr.Description>
+        <ToastPr.Description className="text-sm text-base-content/70">
+          Your changes have been stored safely.
+        </ToastPr.Description>
       </ToastPr.Root>
       <ToastPr.Viewport className="fixed bottom-4 right-4 w-96 max-w-[90vw] outline-none space-y-2 z-[9999]" />
     </ToastPr.Provider>
@@ -639,14 +720,22 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     const r: TestResult[] = [];
 
     if (!canUseDOM()) {
-      r.push({ name: "DOM available", pass: false, details: "window/document not available" });
+      r.push({
+        name: "DOM available",
+        pass: false,
+        details: "window/document not available",
+      });
       setResults(r);
       return;
     }
 
     // Test 1: data-theme applied to :root
     const rootTheme = document.documentElement.getAttribute("data-theme");
-    r.push({ name: "Root data-theme matches state", pass: rootTheme === theme, details: `root='${rootTheme}', state='${theme}'` });
+    r.push({
+      name: "Root data-theme matches state",
+      pass: rootTheme === theme,
+      details: `root='${rootTheme}', state='${theme}'`,
+    });
 
     // Test 2: DaisyUI tokens resolve (bg-primary computes to a color)
     const probe = document.createElement("div");
@@ -654,31 +743,45 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     document.body.appendChild(probe);
     const color = getComputedStyle(probe).backgroundColor;
     document.body.removeChild(probe);
-    r.push({ name: "Token bg-primary resolves to a color", pass: !isTransparent(color), details: color });
+    r.push({
+      name: "Token bg-primary resolves to a color",
+      pass: !isTransparent(color),
+      details: color,
+    });
 
     // Test 3: CSS variables present (simple presence probe) - tolerate DaisyUI v4/v5 names.
-    const primaryTokenPresent = hasToken('--color-primary');
-    const base100TokenPresent = hasToken('--color-base-100');
-    const base200TokenPresent = hasToken('--color-base-200');
+    const primaryTokenPresent = hasToken("--color-primary");
+    const base100TokenPresent = hasToken("--color-base-100");
+    const base200TokenPresent = hasToken("--color-base-200");
     r.push({
-      name: 'Theme variable primary (--color-primary/--p) present',
+      name: "Theme variable primary (--color-primary/--p) present",
       pass: primaryTokenPresent,
-      details: primaryTokenPresent ? formatTokenLabel('--color-primary') : `missing ${formatTokenLabel('--color-primary')}`,
+      details: primaryTokenPresent
+        ? formatTokenLabel("--color-primary")
+        : `missing ${formatTokenLabel("--color-primary")}`,
     });
     r.push({
-      name: 'Theme variable base-100 (--color-base-100/--b1) present',
+      name: "Theme variable base-100 (--color-base-100/--b1) present",
       pass: base100TokenPresent,
-      details: base100TokenPresent ? formatTokenLabel('--color-base-100') : `missing ${formatTokenLabel('--color-base-100')}`,
+      details: base100TokenPresent
+        ? formatTokenLabel("--color-base-100")
+        : `missing ${formatTokenLabel("--color-base-100")}`,
     });
     r.push({
-      name: 'Theme variable base-200 (--color-base-200/--b2) present',
+      name: "Theme variable base-200 (--color-base-200/--b2) present",
       pass: base200TokenPresent,
-      details: base200TokenPresent ? formatTokenLabel('--color-base-200') : `missing ${formatTokenLabel('--color-base-200')}`,
+      details: base200TokenPresent
+        ? formatTokenLabel("--color-base-200")
+        : `missing ${formatTokenLabel("--color-base-200")}`,
     });
 
     // Test 4: Body data-theme mirrors state (for portals)
     const bodyTheme = document.body?.getAttribute("data-theme");
-    r.push({ name: "Body data-theme matches state", pass: bodyTheme === theme, details: `body='${bodyTheme}', state='${theme}'` });
+    r.push({
+      name: "Body data-theme matches state",
+      pass: bodyTheme === theme,
+      details: `body='${bodyTheme}', state='${theme}'`,
+    });
 
     // Test 5: Overlay vs navbar z-index sanity
     const overlay = document.createElement("div");
@@ -687,28 +790,40 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     navbar.className = "sticky z-40";
     document.body.appendChild(overlay);
     document.body.appendChild(navbar);
-    const ziOverlay = parseInt(getComputedStyle(overlay).zIndex || "0", 10);
-    const ziNavbar = parseInt(getComputedStyle(navbar).zIndex || "0", 10);
+    const ziOverlay = Number.parseInt(getComputedStyle(overlay).zIndex || "0", 10);
+    const ziNavbar = Number.parseInt(getComputedStyle(navbar).zIndex || "0", 10);
     overlay.remove();
     navbar.remove();
-    r.push({ name: "Overlay z-index above navbar", pass: ziOverlay > ziNavbar, details: `${ziOverlay} > ${ziNavbar}` });
+    r.push({
+      name: "Overlay z-index above navbar",
+      pass: ziOverlay > ziNavbar,
+      details: `${ziOverlay} > ${ziNavbar}`,
+    });
 
     // Test 6: Theme availability hint
     const themeTokensAvailable = base100TokenPresent && primaryTokenPresent;
     r.push({
-      name: 'Theme CSS present (checks base-100 & primary tokens)',
+      name: "Theme CSS present (checks base-100 & primary tokens)",
       pass: themeTokensAvailable,
       details: themeTokensAvailable
-        ? 'theme tokens resolved'
-        : 'missing DaisyUI theme variables — ensure daisyui plugin is registered',
+        ? "theme tokens resolved"
+        : "missing DaisyUI theme variables — ensure daisyui plugin is registered",
     });
 
     // Test 7: LocalStorage theme persistence
     try {
       const stored = window.localStorage.getItem("rdp.theme");
-      r.push({ name: "localStorage('rdp.theme') matches state", pass: stored === theme, details: `stored='${stored}', state='${theme}'` });
+      r.push({
+        name: "localStorage('rdp.theme') matches state",
+        pass: stored === theme,
+        details: `stored='${stored}', state='${theme}'`,
+      });
     } catch (e) {
-      r.push({ name: "localStorage accessible", pass: false, details: String(e) });
+      r.push({
+        name: "localStorage accessible",
+        pass: false,
+        details: String(e),
+      });
     }
 
     // Test 8: Base surface computes a non-transparent background
@@ -717,7 +832,11 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     document.body.appendChild(bgProbe);
     const bgColor = getComputedStyle(bgProbe).backgroundColor;
     bgProbe.remove();
-    r.push({ name: "bg-base-100 resolves to a color", pass: !isTransparent(bgColor), details: bgColor });
+    r.push({
+      name: "bg-base-100 resolves to a color",
+      pass: !isTransparent(bgColor),
+      details: bgColor,
+    });
 
     // Test 9: Overlay utility resolves non-transparent color
     const ov = document.createElement("div");
@@ -725,39 +844,53 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     document.body.appendChild(ov);
     const ovColor = getComputedStyle(ov).backgroundColor;
     ov.remove();
-    r.push({ name: "bg-base-300/60 resolves to a color", pass: !isTransparent(ovColor), details: ovColor });
+    r.push({
+      name: "bg-base-300/60 resolves to a color",
+      pass: !isTransparent(ovColor),
+      details: ovColor,
+    });
 
     // --- Additional tests (added, non-breaking) ---
     // Test 10: Primary content token present
-    const primaryContentTokenPresent = hasToken('--color-primary-content');
+    const primaryContentTokenPresent = hasToken("--color-primary-content");
     r.push({
-      name: 'Theme variable primary-content (--color-primary-content/--pc) present',
+      name: "Theme variable primary-content (--color-primary-content/--pc) present",
       pass: primaryContentTokenPresent,
       details: primaryContentTokenPresent
-        ? formatTokenLabel('--color-primary-content')
-        : `missing ${formatTokenLabel('--color-primary-content')}`,
+        ? formatTokenLabel("--color-primary-content")
+        : `missing ${formatTokenLabel("--color-primary-content")}`,
     });
     // Test 11: Neutral token present
-    const neutralTokenPresent = hasToken('--color-neutral');
+    const neutralTokenPresent = hasToken("--color-neutral");
     r.push({
-      name: 'Theme variable neutral (--color-neutral/--n) present',
+      name: "Theme variable neutral (--color-neutral/--n) present",
       pass: neutralTokenPresent,
-      details: neutralTokenPresent ? formatTokenLabel('--color-neutral') : `missing ${formatTokenLabel('--color-neutral')}`,
+      details: neutralTokenPresent
+        ? formatTokenLabel("--color-neutral")
+        : `missing ${formatTokenLabel("--color-neutral")}`,
     });
     // Test 12: Border color resolves for border-base-200
-    const borderProbe = document.createElement('div');
-    borderProbe.className = 'border border-base-200';
+    const borderProbe = document.createElement("div");
+    borderProbe.className = "border border-base-200";
     document.body.appendChild(borderProbe);
     const borderColor = getComputedStyle(borderProbe).borderTopColor;
     borderProbe.remove();
-    r.push({ name: 'border-base-200 resolves to a color', pass: !isTransparent(borderColor), details: borderColor });
+    r.push({
+      name: "border-base-200 resolves to a color",
+      pass: !isTransparent(borderColor),
+      details: borderColor,
+    });
     // Test 13: Text color resolves for text-base-content
-    const textProbe = document.createElement('div');
-    textProbe.className = 'text-base-content';
+    const textProbe = document.createElement("div");
+    textProbe.className = "text-base-content";
     document.body.appendChild(textProbe);
     const textColor = getComputedStyle(textProbe).color;
     textProbe.remove();
-    r.push({ name: 'text-base-content resolves to a color', pass: !isTransparent(textColor), details: textColor });
+    r.push({
+      name: "text-base-content resolves to a color",
+      pass: !isTransparent(textColor),
+      details: textColor,
+    });
 
     setResults(r);
   }, [theme]);
@@ -806,7 +939,10 @@ export default function RadixDaisyUIPlayground() {
   }, [theme]);
 
   return (
-    <div id="playground-root" className={`min-h-screen ${density === "compact" ? "text-sm" : "text-base"} bg-base-200 text-base-content`}>
+    <div
+      id="playground-root"
+      className={`min-h-screen ${density === "compact" ? "text-sm" : "text-base"} bg-base-200 text-base-content`}
+    >
       {/* Top Nav */}
       <div className="navbar bg-base-100 border-b border-base-200 sticky top-0 z-40">
         <div className="flex-1">
@@ -814,7 +950,12 @@ export default function RadixDaisyUIPlayground() {
         </div>
         <div className="flex-none pr-2 flex items-center gap-2 flex-row-reverse">
           <div className="join flex-row">
-            <button className="btn join-item" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle light/dark">
+            <button
+              type="button"
+              className="btn join-item"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label="Toggle light/dark"
+            >
               {theme === "dark" ? <SunIcon /> : <MoonIcon />}
             </button>
             <ThemePicker theme={theme} setTheme={setTheme} />
@@ -822,7 +963,12 @@ export default function RadixDaisyUIPlayground() {
           <div className="form-control">
             <label className="label cursor-pointer gap-3">
               <span className="label-text">Compact</span>
-              <input type="checkbox" className="toggle" checked={density === "compact"} onChange={(e) => setDensity(e.target.checked ? "compact" : "comfortable")} />
+              <input
+                type="checkbox"
+                className="toggle"
+                checked={density === "compact"}
+                onChange={(e) => setDensity(e.target.checked ? "compact" : "comfortable")}
+              />
             </label>
           </div>
         </div>
@@ -833,7 +979,10 @@ export default function RadixDaisyUIPlayground() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Design System Playground</h1>
-            <p className="text-base-content/70 mt-1">Radix primitives with DaisyUI v5 theming. Tune tokens, typographic rhythm, spacing, and states across themes.</p>
+            <p className="text-base-content/70 mt-1">
+              Radix primitives with DaisyUI v5 theming. Tune tokens, typographic rhythm, spacing,
+              and states across themes.
+            </p>
           </div>
           <div className="stats shadow">
             <div className="stat">
@@ -852,10 +1001,18 @@ export default function RadixDaisyUIPlayground() {
 
       {/* Tokens */}
       <section className="container max-w-6xl mx-auto px-4 pb-8">
-        <SectionCard title="Design tokens (live)" subtitle="Primary, Secondary, Accent, Neutral, Base — rendered from DaisyUI theme variables" right={<div className="badge">Tokens</div>}>
+        <SectionCard
+          title="Design tokens (live)"
+          subtitle="Primary, Secondary, Accent, Neutral, Base — rendered from DaisyUI theme variables"
+          right={<div className="badge">Tokens</div>}
+        >
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             <TokenSwatch name="Primary" varName="--color-primary" swatchClass="bg-primary" />
-            <TokenSwatch name="Primary Content" varName="--color-primary-content" swatchClass="bg-primary text-primary-content" />
+            <TokenSwatch
+              name="Primary Content"
+              varName="--color-primary-content"
+              swatchClass="bg-primary text-primary-content"
+            />
             <TokenSwatch name="Secondary" varName="--color-secondary" swatchClass="bg-secondary" />
             <TokenSwatch name="Accent" varName="--color-accent" swatchClass="bg-accent" />
             <TokenSwatch name="Neutral" varName="--color-neutral" swatchClass="bg-neutral" />
@@ -873,24 +1030,60 @@ export default function RadixDaisyUIPlayground() {
       {/* Components grid */}
       <main className="container max-w-6xl mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          <SectionCard title="Tabs" subtitle="Radix Tabs with DaisyUI tabs/tabs-boxed styling"><TabsDemo /></SectionCard>
-          <SectionCard title="Accordion" subtitle="Single-collapse accordion with animated chevrons"><AccordionDemo /></SectionCard>
-          <SectionCard title="Dialog" subtitle="Focus-trapped modal with overlay and card surface"><DialogDemo /></SectionCard>
-          <SectionCard title="Dropdown Menu" subtitle="Context unobtrusive actions"><DropdownMenuDemo /></SectionCard>
-          <SectionCard title="Popover" subtitle="Inline, anchored surface for microcopy or forms"><PopoverDemo /></SectionCard>
-          <SectionCard title="Tooltip" subtitle="Short, low-latency affordance hints"><TooltipDemo /></SectionCard>
-          <SectionCard title="Switch" subtitle="Binary toggle with explicit focus treatment"><SwitchDemo /></SectionCard>
-          <SectionCard title="Slider" subtitle="1D continuous input with tokenised rails"><SliderDemo /></SectionCard>
-          <SectionCard title="Checkbox & Radio" subtitle="Form controls with clear checked states"><CheckboxRadioDemo /></SectionCard>
-          <SectionCard title="Progress & Avatar" subtitle="Foreground motion + identity clustering"><ProgressAvatarDemo /></SectionCard>
-          <SectionCard title="Select" subtitle="Use when options exceed a small radio/segmented set"><SelectDemo /></SectionCard>
-          <SectionCard title="Scroll Area" subtitle="Constrained panel with styled scrollbar"><ScrollAreaDemo /></SectionCard>
-          <SectionCard title="Toast" subtitle="Transient confirmations and nudges"><ToastDemo /></SectionCard>
+          <SectionCard title="Tabs" subtitle="Radix Tabs with DaisyUI tabs/tabs-boxed styling">
+            <TabsDemo />
+          </SectionCard>
+          <SectionCard
+            title="Accordion"
+            subtitle="Single-collapse accordion with animated chevrons"
+          >
+            <AccordionDemo />
+          </SectionCard>
+          <SectionCard title="Dialog" subtitle="Focus-trapped modal with overlay and card surface">
+            <DialogDemo />
+          </SectionCard>
+          <SectionCard title="Dropdown Menu" subtitle="Context unobtrusive actions">
+            <DropdownMenuDemo />
+          </SectionCard>
+          <SectionCard title="Popover" subtitle="Inline, anchored surface for microcopy or forms">
+            <PopoverDemo />
+          </SectionCard>
+          <SectionCard title="Tooltip" subtitle="Short, low-latency affordance hints">
+            <TooltipDemo />
+          </SectionCard>
+          <SectionCard title="Switch" subtitle="Binary toggle with explicit focus treatment">
+            <SwitchDemo />
+          </SectionCard>
+          <SectionCard title="Slider" subtitle="1D continuous input with tokenised rails">
+            <SliderDemo />
+          </SectionCard>
+          <SectionCard title="Checkbox & Radio" subtitle="Form controls with clear checked states">
+            <CheckboxRadioDemo />
+          </SectionCard>
+          <SectionCard title="Progress & Avatar" subtitle="Foreground motion + identity clustering">
+            <ProgressAvatarDemo />
+          </SectionCard>
+          <SectionCard
+            title="Select"
+            subtitle="Use when options exceed a small radio/segmented set"
+          >
+            <SelectDemo />
+          </SectionCard>
+          <SectionCard title="Scroll Area" subtitle="Constrained panel with styled scrollbar">
+            <ScrollAreaDemo />
+          </SectionCard>
+          <SectionCard title="Toast" subtitle="Transient confirmations and nudges">
+            <ToastDemo />
+          </SectionCard>
         </div>
 
         {/* Diagnostics & tests */}
         <div className="mt-10">
-          <SectionCard title="Diagnostics & Tests" subtitle="Runtime checks to prevent regressions in theming and tokens" right={<div className="badge badge-outline">non-blocking</div>}>
+          <SectionCard
+            title="Diagnostics & Tests"
+            subtitle="Runtime checks to prevent regressions in theming and tokens"
+            right={<div className="badge badge-outline">non-blocking</div>}
+          >
             <DiagnosticsPanel theme={theme} />
           </SectionCard>
         </div>
@@ -903,7 +1096,11 @@ export default function RadixDaisyUIPlayground() {
             <InfoCircledIcon />
             <div>
               <h3 className="font-medium">Design notes</h3>
-              <p className="text-sm text-base-content/70">Compare components across themes, verify minimum contrast (WCAG AA/AAA), and document hover/active/focus states. Establish size ramps (XS–XL), corner radii, shadows, and motion guidelines here before exporting tokens.</p>
+              <p className="text-sm text-base-content/70">
+                Compare components across themes, verify minimum contrast (WCAG AA/AAA), and
+                document hover/active/focus states. Establish size ramps (XS–XL), corner radii,
+                shadows, and motion guidelines here before exporting tokens.
+              </p>
             </div>
           </div>
         </div>

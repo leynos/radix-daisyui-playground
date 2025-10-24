@@ -4,6 +4,12 @@ bun.lockb
 
 # Build output
 dist
+.artifacts
+.act-stubs
+
+# Tooling caches
+.bin
+.cache
 
 # Editor metadata
 .DS_Store
@@ -13,3 +19,4 @@ dist
 
 # Coverage
 coverage
+.pnpm-store
