@@ -23,6 +23,8 @@
   "javascript": {
     "jsxRuntime": "transparent",
     "formatter": {
+      "indentStyle": "space",
+      "indentWidth": 2,
       "bracketSpacing": true,
       "jsxQuoteStyle": "double",
       "quoteStyle": "double",
@@ -47,6 +49,13 @@
       "include": ["**/*.d.ts"],
       "formatter": { "enabled": false },
       "linter": { "enabled": false }
+    },
+    {
+      "include": ["**/*.html"],
+      "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 2
+      }
     },
     {
       "include": ["**/*.css"],
