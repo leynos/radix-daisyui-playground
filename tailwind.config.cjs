@@ -5,25 +5,6 @@ const config = {
     extend: {},
   },
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: [
-      "business",
-      "dark",
-      "corporate",
-      "emerald",
-      "cupcake",
-      "dracula",
-      "forest",
-      "retro",
-      "synthwave",
-      "wireframe",
-      "aqua",
-      "dim",
-      "lofi",
-      "nord",
-      "coffee",
-    ],
-  },
 };
 
 module.exports = config;

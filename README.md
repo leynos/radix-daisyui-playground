@@ -46,6 +46,13 @@ pnpm preview
 > Existing Bun helpers remain available if you prefer them. For example,
 > `bun run server.ts` still serves `dist/` with an SPA fallback.
 
+### DaisyUI theme configuration
+
+Tailwind CSS v4 reads DaisyUI options from the `@plugin` block in
+`src/index.css`. The project registers the same theme list there (with
+`business` as the default and `dark` honouring `prefers-color-scheme`) so the
+runtime diagnostics see all DaisyUI tokens across themes.
+
 ## GitHub Pages workflow
 
 - `.github/workflows/deploy.yml` builds the site with pnpm and publishes to
