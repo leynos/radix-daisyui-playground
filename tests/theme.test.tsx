@@ -62,8 +62,8 @@ describe("Radix × DaisyUI Playground", () => {
       root?.render(<RadixDaisyUIPlayground />);
     });
 
-    expect(document.documentElement.getAttribute("data-theme")).toBe("business");
-    expect(window.localStorage.getItem("rdp.theme")).toBe("business");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("light");
+    expect(window.localStorage.getItem("rdp.theme")).toBe("light");
 
     const toggle = mount.querySelector<HTMLButtonElement>("button[aria-label='Toggle light/dark']");
     expect(toggle).toBeTruthy();
@@ -79,6 +79,7 @@ describe("Radix × DaisyUI Playground", () => {
 
   it("exposes the full theme list for potential selectors", () => {
     expect(THEMES.length).toBeGreaterThan(0);
+    expect(THEMES).toContain("light");
     expect(THEMES).toContain("business");
     expect(THEMES).toContain("dark");
   });

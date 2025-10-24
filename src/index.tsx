@@ -925,9 +925,9 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
 export default function RadixDaisyUIPlayground() {
   const KEY = "rdp.theme";
   const initialTheme: ThemeName = React.useMemo(() => {
-    if (!canUseDOM()) return "business";
+    if (!canUseDOM()) return "light";
     const stored = window.localStorage.getItem(KEY) as ThemeName | null;
-    return stored && (THEMES as readonly string[]).includes(stored) ? stored : "business";
+    return stored && (THEMES as readonly string[]).includes(stored) ? stored : "light";
   }, []);
 
   const [theme, setTheme] = React.useState<ThemeName>(initialTheme);
