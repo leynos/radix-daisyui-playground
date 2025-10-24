@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "fmt": "bunx biome format --write .",
     "lint": "bunx biome ci .",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "test": "bun test --preload ./tests/setup-happy-dom.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.1",
@@ -41,6 +42,7 @@
     "@types/react-dom": "^19.0.0",
     "@tailwindcss/postcss": "^4.1.16",
     "autoprefixer": "^10.4.20",
+    "happy-dom": "^15.11.2",
     "postcss": "^8.4.49",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",

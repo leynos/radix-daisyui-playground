@@ -53,7 +53,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import React from "react";
 
 // Themes list (typed)
-const THEMES = [
+export const THEMES = [
   "light",
   "dark",
   "corporate",
@@ -72,14 +72,15 @@ const THEMES = [
   "coffee",
 ] as const;
 
-type ThemeName = (typeof THEMES)[number];
+export type ThemeName = (typeof THEMES)[number];
 
 // -------------------------------------------------------------------------
 // Utilities
 // -------------------------------------------------------------------------
-const canUseDOM = (): boolean => typeof window !== "undefined" && typeof document !== "undefined";
+export const canUseDOM = (): boolean =>
+  typeof window !== "undefined" && typeof document !== "undefined";
 
-function applyTheme(theme: string) {
+export function applyTheme(theme: string) {
   if (!canUseDOM()) return;
   const html = document.documentElement;
   const body = document.body || null;
@@ -114,7 +115,7 @@ const TOKEN_FALLBACKS = TOKEN_ALIAS_GROUPS.reduce<Record<string, readonly string
   {},
 );
 
-function resolveTokenCandidates(varName: string): readonly string[] {
+export function resolveTokenCandidates(varName: string): readonly string[] {
   return TOKEN_FALLBACKS[varName] ?? [varName];
 }
 
