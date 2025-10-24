@@ -751,9 +751,14 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
     });
 
     // Test 3: CSS variables present (simple presence probe) - tolerate DaisyUI v4/v5 names.
-    const primaryTokenPresent = hasToken("--color-primary");
-    const base100TokenPresent = hasToken("--color-base-100");
-    const base200TokenPresent = hasToken("--color-base-200");
+    const tokenValue = (token: string): string =>
+      getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+    const primaryTokenPresent =
+      tokenValue("--color-primary").length > 0 || hasToken("--color-primary");
+    const base100TokenPresent =
+      tokenValue("--color-base-100").length > 0 || hasToken("--color-base-100");
+    const base200TokenPresent =
+      tokenValue("--color-base-200").length > 0 || hasToken("--color-base-200");
     r.push({
       name: "Theme variable primary (--color-primary/--p) present",
       pass: primaryTokenPresent,
@@ -853,7 +858,8 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
 
     // --- Additional tests (added, non-breaking) ---
     // Test 10: Primary content token present
-    const primaryContentTokenPresent = hasToken("--color-primary-content");
+    const primaryContentTokenPresent =
+      tokenValue("--color-primary-content").length > 0 || hasToken("--color-primary-content");
     r.push({
       name: "Theme variable primary-content (--color-primary-content/--pc) present",
       pass: primaryContentTokenPresent,
@@ -862,7 +868,8 @@ function DiagnosticsPanel({ theme }: { theme: ThemeName }) {
         : `missing ${formatTokenLabel("--color-primary-content")}`,
     });
     // Test 11: Neutral token present
-    const neutralTokenPresent = hasToken("--color-neutral");
+    const neutralTokenPresent =
+      tokenValue("--color-neutral").length > 0 || hasToken("--color-neutral");
     r.push({
       name: "Theme variable neutral (--color-neutral/--n) present",
       pass: neutralTokenPresent,
