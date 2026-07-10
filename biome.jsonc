@@ -9,7 +9,9 @@
       ".pnpm-store/**",
       ".cache/**",
       ".artifacts/**",
-      ".act-stubs/**"
+      ".act-stubs/**",
+      ".typos-oxendict-base.json",
+      ".typos-oxendict-base.toml"
     ],
     "ignoreUnknown": true
   },
