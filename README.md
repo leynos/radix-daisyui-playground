@@ -65,6 +65,9 @@ runtime diagnostics see all DaisyUI tokens across themes.
   entire job graph offline.
 - `make test-action-local` performs the fast path (`pnpm install`, `pnpm build`)
   with the same smoke checks, which is handy for CI parity without Docker.
+- `make spelling` refreshes the shared en-GB-oxendict dictionary when newer,
+  regenerates `typos.toml`, and checks maintained Markdown with a pinned
+  `typos` release. A valid committed config remains usable without network.
 
 ## Diagnostics
 
