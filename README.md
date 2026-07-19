@@ -1,5 +1,8 @@
 # Radix × DaisyUI Playground
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](
+https://deepwiki.com/leynos/radix-daisyui-playground)
+
 This project is a Vite-powered single-page application that showcases Radix UI
 primitives styled with Tailwind CSS v4 and DaisyUI v5. It is intended as a
 playground for experimenting with cross-theme component styling, spacing, and
