@@ -73,10 +73,13 @@ lint-actions: .deps-actionlint
 	fi; \
 	actionlint -color
 
-.PHONY: clean spelling
+.PHONY: clean fmt spelling
 clean:
 	@rm -rf "$(OUT_DIR)" .artifacts .act-stubs
 	@rm -f .typos-oxendict-base.json .typos-oxendict-base.toml
+
+fmt:
+	mdformat-all
 
 TYPOS_VERSION ?= 1.48.0
 TYPOS := uv tool run typos@$(TYPOS_VERSION)

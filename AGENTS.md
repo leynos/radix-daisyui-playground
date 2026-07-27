@@ -45,7 +45,8 @@
 - Documentation must use en-GB-oxendict ("-ize" / "-yse" / "-our") spelling
   and grammar. (EXCEPTION: the naming of the "LICENSE" file, which is to be
   left unchanged for community consistency.)
-- A documentation style guide is provided at `docs/documentation-style-guide.md`.
+- A documentation style guide is provided at
+  `docs/documentation-style-guide.md`.
 
 ## Change Quality & Committing
 
@@ -180,8 +181,8 @@ project:
 ### Dependency Management (Rust)
 
 - **Mandate caret requirements for all dependencies.** All crate versions
-  specified in `Cargo.toml` must use SemVer-compatible caret requirements
-  (e.g., `some-crate = "1.2.3"`). This is Cargo's default and allows for safe,
+  specified in `Cargo.toml` must use SemVer-compatible caret requirements (e.g.,
+  `some-crate = "1.2.3"`). This is Cargo's default and allows for safe,
   non-breaking updates to minor and patch versions while preventing breaking
   changes from new major versions. This approach is critical for ensuring build
   stability and reproducibility.
