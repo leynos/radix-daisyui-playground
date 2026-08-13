@@ -24,3 +24,10 @@ coverage
 .typos-oxendict-base.toml
 __pycache__/
 *.pyc
+.vtcode/
+.claude/
+.memdb/
+.grepai/
+*.swp
+*.swo
+*~
