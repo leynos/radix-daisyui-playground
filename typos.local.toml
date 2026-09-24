@@ -11,7 +11,15 @@ accepted = []
 [words.corrections]
 
 [patterns]
-ignore = []
+# Upstream identifiers that keep their US spelling. Each pattern is one
+# exact inline code span, so the same spelling anywhere else, including any
+# other code span, is still checked.
+ignore = [
+  # axe-core rule.
+  '`color-contrast`',
+  # CSS media feature.
+  '`prefers-color-scheme`',
+]
 
 [files]
 exclude = []
