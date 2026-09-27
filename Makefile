@@ -13,6 +13,14 @@ ACTIONLINT_VERSION ?= 1.7.1
 BIN_DIR := $(CURDIR)/.bin
 export PATH := $(BIN_DIR):$(PATH)
 
+# `make fmt` and `make check-fmt` call mdtablefix directly. `--git` selects the
+# Markdown files Git tracks and `--include-untracked` adds the untracked files
+# Git does not ignore, so a new document is formatted before it is staged.
+# Both modes need mdtablefix 0.6.0 or later.
+MDTABLEFIX ?= mdtablefix
+MDTABLEFIX_SELECT = --git --include-untracked
+MDTABLEFIX_RULES = --wrap --renumber --breaks --ellipsis --fences
+
 # --- High-level targets -------------------------------------------------------
 
 .PHONY: test-action
@@ -80,6 +88,7 @@ clean:
 
 fmt:
 	mdformat-all
+	$(MDTABLEFIX) --in-place $(MDTABLEFIX_SELECT) $(MDTABLEFIX_RULES)
 
 TYPOS_VERSION ?= 1.48.0
 TYPOS := uv tool run typos@$(TYPOS_VERSION)
@@ -139,3 +148,7 @@ spelling:
 .PHONY: stub-gh-pages-actions
 stub-gh-pages-actions:
 	@./scripts/install_pages_stubs.sh
+
+.PHONY: check-fmt
+check-fmt: ## Verify Markdown formatting
+	$(MDTABLEFIX) --check $(MDTABLEFIX_SELECT) $(MDTABLEFIX_RULES)
